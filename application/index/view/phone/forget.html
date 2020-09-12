@@ -1,0 +1,79 @@
+{extend name="public/base" /} {block name="content"}
+<style>
+	.col-xs-3 .nav p {
+		font-size: 20px;
+		font-weight: bold;
+	}
+	.col-xs-3 .nav a {
+		color: #00aeff;
+	}
+	.btn a {
+		text-decoration: none;
+		color: #FFFFFF;
+	}
+</style>
+<div>
+
+	<div class="tab-content">
+		<div style="height: 180px;">
+			<div class="col-xs-3">
+				<ul class="nav nav-tab vertical-tab" role="tablist" id="vtab">
+					<li role="presentation" class="active list-nav1">
+						<p>通过手机号找回</p>
+						<a href="#">or 通过邮箱找回</a>
+					</li>
+					<li role="presentation" class="list-nav2">
+						<p>通过邮箱找回</p>
+						<a href="#">or 通过手机号找回</a>
+					</li>
+				</ul>
+			</div>
+			<div class="tab-content vertical-tab-content col-xs-7">
+				<div class="list-nav1">
+					<form method="post" action="{:url('phone/findphone')}">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" required pattern="^1[34578]\d{9}$" id="phone" name="phone" placeholder="请输入手机号" />
+								<span class="input-group-btn">
+						<button class="btn btn-default" id="getcode" type="button">获取验证码！</button>
+					</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="code" name="code" placeholder="验证码" />
+						</div>
+						<button type="submit" class="btn btn-default">找回密码</button>
+					</form>
+				</div>
+				<div class="list-nav2">
+					<form method="post" action="{:url('email/findemail')}">
+						<div class="form-group">
+							<div class="form-group">
+								<input type="email" class="form-control" name="email" placeholder="您常用邮箱" />
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default">找回密码</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<button type="button" class="btn btn-info"><a href="{:url('phone/login')}">已有账号，直接登录</a></button>
+
+	</div>
+</div>
+{/block} {block name='js'}
+<script src="__STATIC__/layer/layer.js"></script>
+<script>
+	$('.list-nav2').css('display', 'none');
+
+	$('.list-nav1 a').click(function() {
+		$('.list-nav2').css('display', 'block');
+		$('.list-nav1').css('display', 'none');
+	})
+	$('.list-nav2 a').click(function() {
+		$('.list-nav1').css('display', 'block');
+		$('.list-nav2').css('display', 'none');
+	})
+</script>
+{/block}

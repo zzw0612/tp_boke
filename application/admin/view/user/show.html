@@ -1,0 +1,32 @@
+{extend name="public/base1" /} 
+{block name="content"}
+<div class="cl pd-20" style=" background-color:#5bacb6">
+	<dl style="margin-left:80px; color:#fff">
+		<dt><span class="f-18">{$data['username']}</span></dt>
+	</dl>
+</div>
+<div class="pd-20">
+	<table class="table">
+		<tbody>
+			<tr>
+				<th class="text-r">#：</th>
+				<td>{$data['id']}</td>
+			</tr>
+			<tr>
+				<th class="text-r">用户：</th>
+				<td>{$data['username']}</td>
+			</tr>
+			<tr>
+				<th class="text-r">注册时间：</th>
+				<td>{$data['create_time']}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+{/block}
+ {block name="js"}
+<script type="text/javascript" src="__STATIC__/hui/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/hui/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/hui/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="__STATIC__/hui/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+{/block}

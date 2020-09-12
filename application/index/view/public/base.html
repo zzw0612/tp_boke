@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>{$title|default='单词'}</title>
+		<link rel="stylesheet" href="__STATIC__/assets/css/bootstrap.min.css" /> {block name="style"}{/block}
+		<style>
+			.footer {
+				height: 50px;
+				color: aliceblue;
+				background: black;
+				text-align: center;
+				line-height: 50px;
+				width: 100%;
+			}
+			
+			.myhead {
+				height: 25px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					    </button>
+						<a class="navbar-brand" href="#">Brand</a>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							{if empty($Think.session.user)}
+							<li>
+								<a href="{:url('phone/login')}">登录</a>
+							</li>
+							<li>
+								<a href="{:url('phone/register')}">注册</a>
+							</li>
+							{else/}
+							<li>
+								<a href="{:url('admin/index/index')}">
+									<img class="myhead" src="{$Request.root}/{$Think.session.user.heading}" alt=""> {$Think.session.user.username}--个人中心
+								</a>
+							</li>
+							<li>
+								<a href="{:url('phone/logout')}">退出登录</a>
+							</li>
+							{/if}
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					{include file="public/menu"} {block name="content"}{/block}
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+		<div class="footer" id="footer">底部文字</div>
+		<script src="__STATIC__/assets/js/jquery.min.js"></script>
+		<script src="__STATIC__/assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(window).bind("load", function() {
+				var footerHeight = 0,
+					footerTop = 0,
+					$footer = $("#footer");
+				positionFooter();
+				//定义positionFooter function
+				function positionFooter() {
+					//取到div#footer高度
+					footerHeight = $footer.height();
+					//div#footer离屏幕顶部的距离
+					footerTop = ($(window).scrollTop() + $(window).height() - footerHeight - 35) + "px";
+					//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
+					if(($(document.body).height() + footerHeight) < $(window).height()) {
+						$footer.css({
+							position: "absolute"　　
+						}).stop().animate({　　
+							top: footerTop,
+							　　
+						});
+					} else {
+						$footer.css({
+							position: "static"
+						});
+					}
+				}
+				$(window).scroll(positionFooter).resize(positionFooter);
+			});
+		</script>
+		{block name="js"}{/block}
+	</body>
+
+</html>

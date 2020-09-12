@@ -1,0 +1,93 @@
+{extend name="public/base1" /}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/umeditor/themes/default/css/umeditor.min.css" />
+{/block} 
+{block name="content"}
+<article class="cl pd-20">
+	<form action="{:url('notice/save')}" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>公告标题</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="title" name="title">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>公告内容</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<script id="editor" name="content" type="text/plain"></script>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="phone" name="phone">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="@" name="email" id="email">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+
+{/block} {block name="js"}
+<script type="text/javascript" src="__STATIC__/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="__STATIC__/hui/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__STATIC__/hui/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__STATIC__/hui/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__STATIC__/hui/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+
+<script type="text/javascript">
+	var editor = UM.getEditor('editor');
+	$(document).ready(function() {
+		editor.addListener('ready', function() {
+			editor.setContent('这是初始的文本');
+		})
+	})
+	
+	$(function(){
+	
+	$("#form-member-add").validate({
+		rules:{
+			title:{
+				required:true,
+				minlength:6,
+			},
+			
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+//			$(form).ajaxSubmit();
+//			var index = parent.layer.getFrameIndex(window.name);
+//			parent.$('.btn-refresh').click();
+//			parent.layer.close(index);
+			$(form).ajaxSubmit({
+				success:function(data){
+					alert(data.msg);
+					if(data.code==0){
+						var index=parent.layer.getFrameIndex(window.name);
+						//parent.$('.btn-refresh').click();
+						window.parent.location.reload();
+						parent.layer.close(index);
+					}
+				}
+			})
+		}
+	});
+});
+</script>
+
+{/block}

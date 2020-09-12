@@ -1,0 +1,61 @@
+{extend name="public/base" /} {block name="content"}
+<form method="post" action="{:url('phone/save')}">
+	<div class="form-group">
+		<div class="input-group">
+			<input type="text" class="form-control" required maxlength="20" id="username" name="username" placeholder="请输入用户名" />
+			<span class="input-group-addon" id="tipinfo"></span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<input type="password" class="form-control" required id="password" name="password" placeholder="请输入密码" />
+	</div>
+	<div class="form-group">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="agree" checked="checked"/>我已阅读并接受《用户服务协议》
+			</label>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary btn-block" id="add">注册用户</button>
+</form>
+{/block} {block name='js'}
+<script src="__STATIC__/layer/layer.js"></script>
+<script>
+	$('#agree').click(function() {
+		$('#agree').attr('checked') ?
+			$('#agree').attr('checked', false) :
+			$('#agree').attr('checked', true);
+
+		$('#agree').attr('checked') ?
+			$('#add').attr('disabled', false) :
+			$('#add').attr('disabled', true);
+	})
+
+	$(function() {
+		$('#username').blur(function() {
+			var username = $(this).val();
+			$('#add').prop('disabled', false);
+			$.ajax({
+				url: "{:url('phone/checkusername')}",
+				data: {
+					username: username,
+				},
+				async: true,
+				cache: false,
+				type: "POST",
+				dataType: 'json',
+				success: function(data) {
+					console.log(data);
+					if(data.code == 0) {
+						$('#tipinfo').html('用户名可用');
+					} else {
+						$('#tipinfo').html('此用户名不可用');
+						$('#add').prop('disabled', true);
+					}
+				}
+			});
+		});
+	});
+</script>
+{/block}

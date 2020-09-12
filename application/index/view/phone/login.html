@@ -1,0 +1,42 @@
+{extend name="public/base" /} {block name="content"}
+<div>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active">
+			<a href="#home" aria-controls="home" role="tab" data-toggle="tab">用户名</a>
+		</li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="home">
+			<br />
+			<form method="post" action="{:url('phone/loginusername')}">
+				<div class="form-group">
+					<input type="text" class="form-control" id="username" name="username" placeholder="用户名" />
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" id="password" name="password" placeholder="密码" />
+				</div>
+				<div style="text-align: right;">
+					<a style="text-decoration: none;" href="{:url('phone/forget')}">忘记密码？</a>
+				</div>
+				<button type="submit" class="btn btn-default">登录</button>
+			</form>
+		</div>
+	</div>
+
+</div>
+{/block} {block name='js'}
+<script src="__STATIC__/layer/layer.js"></script>
+<script>
+	$('#agree').click(function() {
+		$('#agree').attr('checked') ?
+			$('#agree').attr('checked', false) :
+			$('#agree').attr('checked', true);
+
+		$('#agree').attr('checked') ?
+			$('#add').attr('disabled', false) :
+			$('#add').attr('disabled', true);
+	})
+</script>
+{/block}

@@ -1,0 +1,56 @@
+<!--_menu 作为公共模版分离出去-->
+<aside class="Hui-aside">
+
+	<div class="menu_dropdown bk_2">
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 公告管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li>
+						<a href="{:url('notice/index')}" title="资讯管理">公告列表</a>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-product">
+			<dt><i class="Hui-iconfont">&#xe620;</i> 文章管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li>
+						<a href="{:url('@admin/article/index')}" title="文章管理">文章管理</a>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-member">
+			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li>
+						<a href="{:url('@admin/user/index')}" title="会员列表">会员列表</a>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-system">
+			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li>
+						<a href="{:url('@admin/data/index')}" title="数据库管理">数据库管理</a>
+					</li>
+					<li>
+						<a href="{:url('@admin/category/index')}" title="栏目管理">栏目管理</a>
+					</li>
+					<li>
+						<a href="{:url('@admin/websitelink/index')}" title="友情链接">友情链接</a>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+</aside>
+<div class="dislpayArrow hidden-xs">
+	<a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
+</div>
+<!--/_menu 作为公共模版分离出去-->
